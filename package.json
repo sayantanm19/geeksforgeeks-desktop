@@ -1,0 +1,14 @@
+{
+  "name": "geeksforgeeks-desktop",
+  "version": "1.0.0",
+  "description": "Simple GeeksforGeeks wrapper",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^7.1.7"
+  }
+}
