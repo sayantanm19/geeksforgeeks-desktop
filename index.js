@@ -6,36 +6,7 @@ var path = require('path')
 const savedFolder = __dirname + '\\saved\\';
 
 // global variable that holds the app window
-let win
-
-function createWindow() {
-
-  // creating the browser window.
-  win = new BrowserWindow({
-    width: 960,
-    height: 540,
-  })
-
-  // load automatically redirecting url to login and feed
-  win.loadURL('https://auth.geeksforgeeks.org/?to=https://auth.geeksforgeeks.org/profile.php')
-
-  win.on('closed', () => {
-    win = null
-  })
-
-  // prevent from spawning new window
-  win.webContents.on('new-window', (event, url) => {
-
-    event.preventDefault()
-    win.loadURL(url)
-  })
-
-  getSavedArticles()
-}
-
-// executing the createWindow function
-// when the app is ready
-app.on('ready', createWindow)
+let win;
 
 // menu template for the menubar
 let menu_template = [
@@ -179,11 +150,36 @@ let menu_template = [
     label: 'Saved Articles',
     submenu: []
   }
-]
+];
 
-// build the template and use the menu
-const menu = Menu.buildFromTemplate(menu_template)
-Menu.setApplicationMenu(menu)
+function createWindow() {
+
+  // creating the browser window.
+  win = new BrowserWindow({
+    width: 960,
+    height: 540,
+  })
+
+  // load automatically redirecting url to login and feed
+  win.loadURL('https://auth.geeksforgeeks.org/?to=https://auth.geeksforgeeks.org/profile.php')
+
+  win.on('closed', () => {
+    win = null
+  })
+
+  // prevent from spawning new window
+  win.webContents.on('new-window', (event, url) => {
+
+    event.preventDefault()
+    win.loadURL(url)
+  })
+
+  // build the template and use the menu
+  const menu = Menu.buildFromTemplate(menu_template)
+  Menu.setApplicationMenu(menu)
+
+  getSavedArticles();
+}
 
 // function to save a page offline
 function savePageOffline() {
@@ -228,5 +224,8 @@ function appendItemToMenu(filename) {
     }))
 }
 
+// executing the createWindow function
+// when the app is ready
+app.on('ready', createWindow)
 
 
